@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speisekarte | Neuwirt Oberding — Bayerisch &amp; Kroatisch</title>
+  <meta name="description" content="Unsere Speisekarte: bayerische Klassiker, kroatische Grillspezialitäten, Schnitzel, Brotzeit &amp; mehr. Gasthaus Neuwirt Oberding bei München.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Speisekarte | Neuwirt Oberding — Bayerisch &amp; Kroatisch">
+  <meta property="og:description" content="Unsere Speisekarte: bayerische Klassiker, kroatische Grillspezialitäten, Schnitzel, Brotzeit &amp; mehr. Gasthaus Neuwirt Oberding bei München.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest:      '#1A3A2A',
+            'forest-dk': '#122A1E',
+            cream:       '#FAF7F0',
+            gold:        '#B8860B',
+            'gold-lt':   '#D4A020',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #FAF7F0;
+      color: #1A3A2A;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav (identical to index.html) ── */
+    #nav {
+      transition: background-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    #nav.pinned {
+      background-color: #1A3A2A;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.28);
+    }
+    .nav-link {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(250,247,240,0.8);
+      text-decoration: none;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-link:hover        { color: #D4A020; }
+    .nav-link:focus-visible{ outline: 2px solid #D4A020; outline-offset: 3px; }
+    .nav-link.active       { color: #D4A020; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.25rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .btn:active { transform: translateY(1px); opacity: 0.82; }
+    .btn-gold {
+      background: #B8860B; color: #FAF7F0; border-color: #B8860B;
+    }
+    .btn-gold:hover        { background: #D4A020; border-color: #D4A020; transform: translateY(-2px); }
+    .btn-gold:focus-visible{ outline: 3px solid #D4A020; outline-offset: 3px; }
+
+    /* ── Page header ── */
+    .page-header {
+      background-color: #1A3A2A;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(42,80,64,0.9) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 4 L56 30 L30 56 L4 30 Z' fill='none' stroke='rgba(184,134,11,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+      padding: 7rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    /* ── Menu layout ── */
+    .menu-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Category heading */
+    .cat-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: #1A3A2A;
+      margin-bottom: 0.25rem;
+      line-height: 1.15;
+    }
+    .cat-rule {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #B8860B;
+      margin-bottom: 2rem;
+      margin-top: 0.75rem;
+    }
+
+    /* Dish row */
+    .dish-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(26,58,42,0.08);
+    }
+    .dish-row:last-child {
+      border-bottom: none;
+    }
+    .dish-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: #1A3A2A;
+      line-height: 1.45;
+      flex: 1;
+    }
+    .dish-name small {
+      display: block;
+      font-size: 0.8125rem;
+      color: rgba(26,58,42,0.5);
+      margin-top: 0.2rem;
+      font-weight: 300;
+      line-height: 1.4;
+    }
+    .dish-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #B8860B;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Section separator */
+    .section-divider {
+      max-width: 760px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(26,58,42,0.1);
+    }
+    .divider-diamond {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: #B8860B;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* Footer identical to index.html */
+    .nav-footer-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(250,247,240,0.8);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-footer-link:hover { color: #D4A020; }
+    .nav-footer-link:focus-visible { outline: 2px solid #D4A020; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav id="nav" class="fixed top-0 inset-x-0 z-50 py-3 px-6 md:px-12" style="background-color:#1A3A2A;">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="focus-visible:outline-2 focus-visible:outline-gold-lt" aria-label="Gasthaus Neuwirt Oberding – Startseite">
+      <img
+        src="brand_assets/Website_NeuwirtOberdingMandic_Logo.png"
+        alt="Gasthaus Neuwirt Oberding"
+        style="height:90px;width:auto;max-width:calc(100vw - 160px);filter:brightness(0) invert(1);opacity:0.92;display:block;"
+      >
+    </a>
+    <div class="hidden md:flex items-center gap-9">
+      <a href="index.html#ueber-uns"  class="nav-link">Über uns</a>
+      <a href="speisekarte.html" class="nav-link active">Speisekarte</a>
+      <a href="index.html#reservierung" class="nav-link">Reservierung</a>
+      <a href="index.html#kontakt"    class="nav-link">Kontakt</a>
+      <a href="index.html#reservierung" class="btn btn-gold" style="padding:0.625rem 1.4rem;font-size:0.75rem;">Tisch reservieren</a>
+    </div>
+    <!-- Mobile toggle -->
+    <button id="burger" aria-label="Menü öffnen" aria-expanded="false"
+      class="md:hidden text-cream focus-visible:outline-2 focus-visible:outline-gold-lt p-1"
+      style="color:rgba(250,247,240,0.9);transition:opacity 0.2s ease;">
+      <svg id="icon-open"  width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <!-- Mobile drawer -->
+  <div id="mobile-nav" class="hidden md:hidden mt-3 pt-4 pb-3 px-1"
+    style="border-top:1px solid rgba(250,247,240,0.15);">
+    <div class="flex flex-col gap-5">
+      <a href="index.html#ueber-uns"   class="nav-link">Über uns</a>
+      <a href="speisekarte.html" class="nav-link active">Speisekarte</a>
+      <a href="index.html#reservierung" class="nav-link">Reservierung</a>
+      <a href="index.html#kontakt"     class="nav-link">Kontakt</a>
+      <a href="index.html#reservierung" class="btn btn-gold inline-block self-start">Tisch reservieren</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HEADER ══════════ -->
+<header class="page-header">
+  <p style="font-size:0.6875rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;">
+    Gasthaus Neuwirt Oberding
+  </p>
+  <h1 class="font-display text-cream font-bold"
+    style="font-size:clamp(2.5rem,6vw,4rem);line-height:1.1;margin-bottom:1rem;">
+    Unsere Speisekarte
+  </h1>
+  <span style="display:block;width:48px;height:2px;background:#B8860B;margin:0 auto 1.25rem;"></span>
+  <p style="font-family:'Inter',sans-serif;color:rgba(250,247,240,0.65);font-size:1rem;max-width:480px;margin:0 auto;">
+    Bayerische Hausküche trifft mediterrane Grillkultur — frisch zubereitet, täglich für Sie.
+  </p>
+</header>
+
+<!-- ══════════ MENU CONTENT ══════════ -->
+<main style="padding: 5rem 0 4rem;">
+
+  <!-- VORSPEISEN -->
+  <section class="menu-section" aria-labelledby="cat-vorspeisen">
+    <h2 class="cat-heading" id="cat-vorspeisen">Vorspeisen</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">Tomatensuppe mit frischem Basilikum</span>
+        <span class="dish-price">4,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Leberspätzlesuppe</span>
+        <span class="dish-price">4,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Pfannkuchensuppe</span>
+        <span class="dish-price">4,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Dalmatinische Platte mit Pršut &amp; Käse</span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- BEILAGEN & SALATE -->
+  <section class="menu-section" aria-labelledby="cat-salate">
+    <h2 class="cat-heading" id="cat-salate">Beilagen &amp; Salate</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">Gemischter Salat</span>
+        <span class="dish-price">3,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Grüner Salat</span>
+        <span class="dish-price">3,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Krautsalat</span>
+        <span class="dish-price">3,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Tomate-Mozzarella-Salat mit Balsamicodressing</span>
+        <span class="dish-price">8,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Dalmatinischer Salat
+          <small>mit Schafskäse und gegrillten Hähnchenbruststreifen, Salaten der Saison, Tomate, Peperoni, Gurke, Balsamicodressing, Brot</small>
+        </span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Bauernsalat
+          <small>mit Tomaten, Gurken, Oliven, Zwiebeln, Peperoni, Schafskäse</small>
+        </span>
+        <span class="dish-price">11,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- BROTZEIT -->
+  <section class="menu-section" aria-labelledby="cat-brotzeit">
+    <h2 class="cat-heading" id="cat-brotzeit">Brotzeit</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">Bayerischer Wurstsalat</span>
+        <span class="dish-price">11,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Schweizer Wurstsalat</span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">6 Nürnberger mit Sauerkraut</span>
+        <span class="dish-price">11,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Leberkäse mit Spiegelei und Bratkartoffeln</span>
+        <span class="dish-price">10,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Brotzeitplatte
+          <small>mit Schinken, Käse, Landjäger, Griebenschmalz, Obazda</small>
+        </span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Fetakäse paniert mit Salat und Tzatziki</span>
+        <span class="dish-price">8,00 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- VEGETARISCH -->
+  <section class="menu-section" aria-labelledby="cat-vegetarisch">
+    <h2 class="cat-heading" id="cat-vegetarisch">Vegetarisch</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Vegetarischer Teller
+          <small>Đuvečreis, gebackene Champignons, gegrilltes Gemüse, Salzkartoffeln</small>
+        </span>
+        <span class="dish-price">11,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Gebackene Champignons mit Brot</span>
+        <span class="dish-price">9,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Käsespätzle mit einem kleinen Salat</span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- VOM GRILL -->
+  <section class="menu-section" aria-labelledby="cat-grill">
+    <h2 class="cat-heading" id="cat-grill">Vom Grill</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Ćevapčići
+          <small>mit Đuvečreis und Pommes</small>
+        </span>
+        <span class="dish-price">15,80 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Pola Pola
+          <small>Ćevapčići und Ražnjići mit Pommes und Reis</small>
+        </span>
+        <span class="dish-price">16,90 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Gefüllte Pljeskavica
+          <small>mit Pommes und Reis, gefüllt mit Schafskäse</small>
+        </span>
+        <span class="dish-price">17,90 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Grillteller
+          <small>Ćevapčići, Ražnjići, Pljeskavica, Putensteakscheiben, Speck, Pommes, Reis</small>
+        </span>
+        <span class="dish-price">19,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Adriaplatte <em style="font-style:italic;font-size:0.8125rem;color:rgba(26,58,42,0.5);">für 2 Personen</em>
+          <small>2× Schweinefilet, 2× Ražnjići, 2× Ćevapčići, 2× Speck, 2× Pljeskavica, 2× Hähnchenbrustfilet, Pommes und Reis</small>
+        </span>
+        <span class="dish-price">37,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Rumpsteak mit Pommes</span>
+        <span class="dish-price">24,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Zwiebelrostbraten mit Bratkartoffeln</span>
+        <span class="dish-price">25,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Hamburger mit Pommes</span>
+        <span class="dish-price">11,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Cheeseburger mit Pommes</span>
+        <span class="dish-price">12,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- SCHNITZEL -->
+  <section class="menu-section" aria-labelledby="cat-schnitzel">
+    <h2 class="cat-heading" id="cat-schnitzel">Schnitzel</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Wiener Schnitzel vom Kalb
+          <small>mit Bratkartoffeln und Preiselbeeren</small>
+        </span>
+        <span class="dish-price">23,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Schnitzel Wiener Art mit Pommes</span>
+        <span class="dish-price">15,90 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Cordon Bleu mit Pommes</span>
+        <span class="dish-price">17,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Münchner Schnitzel
+          <small>mit Bratkartoffeln, Meerrettich, Senf</small>
+        </span>
+        <span class="dish-price">16,80 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">Putenschnitzel paniert mit Pommes</span>
+        <span class="dish-price">16,90 €</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="divider-diamond"></span></div>
+
+  <!-- AUS DER PFANNE -->
+  <section class="menu-section" aria-labelledby="cat-pfanne">
+    <h2 class="cat-heading" id="cat-pfanne">Aus der Pfanne</h2>
+    <span class="cat-rule"></span>
+    <div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Schweinefiletmedaillons in Pfefferrahmsauce
+          <small>mit Bratkartoffeln</small>
+        </span>
+        <span class="dish-price">18,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Muckalica
+          <small>pikantes Schweinefilet mit verschiedenem Gemüse und Tomatensauce</small>
+        </span>
+        <span class="dish-price">18,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Putenmedaillons in Champignonsauce
+          <small>mit Spätzle</small>
+        </span>
+        <span class="dish-price">17,50 €</span>
+      </div>
+      <div class="dish-row">
+        <span class="dish-name">
+          Jägerschnitzel
+          <small>mit Jägersauce, Pommes und Champignons</small>
+        </span>
+        <span class="dish-price">16,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Allergen note -->
+  <div class="menu-section" style="margin-top:5rem;padding-top:2rem;border-top:1px solid rgba(26,58,42,0.1);">
+    <p style="font-family:'Inter',sans-serif;font-size:0.8125rem;color:rgba(26,58,42,0.4);text-align:center;line-height:1.6;">
+      Informationen zu Zusatzstoffen und Allergenen erhalten Sie beim Personal.
+    </p>
+  </div>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer style="background-color:#122A1E;" class="pt-14 pb-8 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10"
+      style="border-bottom:1px solid rgba(184,134,11,0.2);">
+      <div>
+        <p class="font-display text-cream text-2xl font-semibold mb-1">
+          Neuwirt&thinsp;<span style="color:#B8860B">Oberding</span>
+        </p>
+        <p style="font-family:'Inter',sans-serif;color:rgba(250,247,240,0.35);font-size:0.75rem;letter-spacing:0.05em;">
+          Bayerisches <strong>Restaurant</strong> &amp; Gasthaus · 85445 Oberding bei München
+        </p>
+      </div>
+      <nav aria-label="Footer-Navigation" class="flex flex-wrap gap-x-7 gap-y-3">
+        <a href="index.html#ueber-uns"   class="nav-footer-link">Über uns</a>
+        <a href="speisekarte.html"        class="nav-footer-link" style="color:#D4A020;">Speisekarte</a>
+        <a href="index.html#reservierung" class="nav-footer-link">Reservierung</a>
+        <a href="index.html#kontakt"      class="nav-footer-link">Kontakt</a>
+        <a href="#"                       class="nav-footer-link">Impressum</a>
+        <a href="#"                       class="nav-footer-link">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p style="font-family:'Inter',sans-serif;color:rgba(250,247,240,0.2);font-size:0.75rem;line-height:1.6;text-align:center;">
+        Restaurant Oberding · Gasthaus Oberding · Bayerisches Restaurant Erding ·
+        Wirtshaus Oberding · Biergarten Oberding · Restaurant bei München
+      </p>
+      <p style="font-family:'Inter',sans-serif;color:rgba(250,247,240,0.2);font-size:0.75rem;white-space:nowrap;">
+        © 2025 Neuwirt Oberding
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll pin
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('pinned', window.scrollY > 72);
+  }, { passive: true });
+
+  // Mobile burger
+  const burger    = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const iconOpen  = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  burger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('hidden');
+    burger.setAttribute('aria-expanded', String(!open));
+    iconOpen.classList.toggle('hidden', !open);
+    iconClose.classList.toggle('hidden', open);
+  });
+  mobileNav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      burger.setAttribute('aria-expanded', 'false');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    })
+  );
+</script>
+</body>
+</html>
