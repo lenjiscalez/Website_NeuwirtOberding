@@ -108,6 +108,10 @@
       padding-top: 0.375rem;
       padding-bottom: 0.375rem;
     }
+    #nav.nav-open {
+      background-color: #1A3A2A;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.28);
+    }
 
     /* ── Logo shrink on scroll ── */
     #nav-logo {
@@ -517,14 +521,18 @@
     </div>
   </div>
 
-  <!-- Scroll indicator — outer div uses inset-x-0 for centering so the bob animation
-       doesn't clobber translateX(-50%) -->
-  <div class="absolute bottom-8 inset-x-0 flex justify-center hero-a4" aria-hidden="true">
-    <div class="scroll-dot flex flex-col items-center gap-2">
-      <span class="font-body text-cream/40 text-xs tracking-widest uppercase">Entdecken</span>
-      <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="rgba(250,247,240,0.4)" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l6 6 6-6"/>
-      </svg>
+  <!-- Scroll indicator: 3 layers to avoid animation conflicts
+       1) outer: pure positioning (no transform, no animation)
+       2) middle: fadeUp entrance animation (translateY only)
+       3) inner: bob loop animation (translateY only) -->
+  <div class="absolute bottom-8 inset-x-0" aria-hidden="true">
+    <div class="hero-a4 flex justify-center">
+      <div class="scroll-dot flex flex-col items-center gap-2">
+        <span class="font-body text-cream/40 text-xs tracking-widest uppercase">Entdecken</span>
+        <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="rgba(250,247,240,0.4)" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l6 6 6-6"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -969,10 +977,12 @@
   const iconClose = document.getElementById('icon-close');
 
   burger.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('hidden');
-    burger.setAttribute('aria-expanded', String(!open));
-    iconOpen.classList.toggle('hidden', !open);
-    iconClose.classList.toggle('hidden', open);
+    const nowHidden = mobileNav.classList.toggle('hidden');
+    const menuOpen = !nowHidden;
+    burger.setAttribute('aria-expanded', String(menuOpen));
+    iconOpen.classList.toggle('hidden', menuOpen);
+    iconClose.classList.toggle('hidden', !menuOpen);
+    nav.classList.toggle('nav-open', menuOpen);
   });
   mobileNav.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', () => {
@@ -980,6 +990,7 @@
       burger.setAttribute('aria-expanded', 'false');
       iconOpen.classList.remove('hidden');
       iconClose.classList.add('hidden');
+      nav.classList.remove('nav-open');
     })
   );
 
