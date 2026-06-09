@@ -224,6 +224,17 @@
         rgba(18,42,30,0.88) 100%
       );
     }
+    @media (max-width: 767px) {
+      .hero-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(18,42,30,0.55) 0%,
+          rgba(18,42,30,0.50) 30%,
+          rgba(18,42,30,0.78) 65%,
+          rgba(18,42,30,0.95) 100%
+        );
+      }
+    }
     /* Decorative side lines in hero */
     .hero-side {
       position: absolute;
@@ -482,36 +493,39 @@
   <div class="hero-corner hero-corner-bl hidden md:block" aria-hidden="true"></div>
   <div class="hero-corner hero-corner-br hidden md:block" aria-hidden="true"></div>
 
-  <div class="relative z-10 px-6 max-w-3xl mx-auto">
-    <p class="eyebrow hero-a1 mb-5 flex items-center justify-center gap-3">
+  <div class="relative z-10 px-6 max-w-3xl mx-auto pb-24 md:pb-0">
+    <p class="eyebrow hero-a1 mb-4 md:mb-5 flex items-center justify-center gap-3">
       <span class="diamond"></span>Seit Generationen in Oberding<span class="diamond"></span>
     </p>
 
-    <h1 class="hero-a2 font-display text-cream font-bold leading-[1.08] mb-6"
+    <h1 class="hero-a2 font-display text-cream font-bold leading-[1.08] mb-5 md:mb-6"
       style="font-size:clamp(2.4rem, 6vw, 4.5rem);">
       Ihr bayerisches<br>
       <em style="color:#E8C96B;">Gasthaus in Oberding</em>
     </h1>
 
-    <span class="gold-line gold-line-center hero-a2 block" style="margin-bottom:1.75rem;"></span>
+    <span class="gold-line gold-line-center hero-a2 block" style="margin-bottom:1.5rem;"></span>
 
-    <p class="hero-a3 font-body text-cream/75 leading-relaxed mb-10 max-w-xl mx-auto"
+    <p class="hero-a3 font-body text-cream/80 leading-relaxed mb-8 md:mb-10 max-w-xl mx-auto"
       style="font-size:clamp(1rem,2vw,1.15rem);">
       Bayerische Gastlichkeit trifft dalmatinische Küche — herzlich, ehrlich, hausgemacht.
     </p>
 
-    <div class="hero-a4 flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <a href="#reservierung" class="btn btn-gold">Tisch reservieren</a>
-      <a href="speisekarte.html"  class="btn btn-ghost-light">Zur Speisekarte</a>
+    <div class="hero-a4 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center">
+      <a href="#reservierung" class="btn btn-gold w-full sm:w-auto">Tisch reservieren</a>
+      <a href="speisekarte.html" class="btn btn-ghost-light w-full sm:w-auto">Zur Speisekarte</a>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-dot hero-a4 flex flex-col items-center gap-2" aria-hidden="true">
-    <span class="font-body text-cream/40 text-xs tracking-widest uppercase">Entdecken</span>
-    <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="rgba(250,247,240,0.4)" stroke-width="1.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l6 6 6-6"/>
-    </svg>
+  <!-- Scroll indicator — outer div uses inset-x-0 for centering so the bob animation
+       doesn't clobber translateX(-50%) -->
+  <div class="absolute bottom-8 inset-x-0 flex justify-center hero-a4" aria-hidden="true">
+    <div class="scroll-dot flex flex-col items-center gap-2">
+      <span class="font-body text-cream/40 text-xs tracking-widest uppercase">Entdecken</span>
+      <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="rgba(250,247,240,0.4)" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l6 6 6-6"/>
+      </svg>
+    </div>
   </div>
 </section>
 
